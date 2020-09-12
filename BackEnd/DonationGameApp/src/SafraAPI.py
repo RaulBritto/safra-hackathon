@@ -1,4 +1,5 @@
 import requests
+import json
 from flask import jsonify
 
 class SafraAPI:
@@ -35,7 +36,8 @@ class SafraAPI:
 
     @staticmethod
     def GetBalance(apiKey, accountId):
-        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/" + accountId + "/balances"
+        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/"\
+                 + accountId + "/balances"
 
         payload = {}
         headers = {
@@ -45,12 +47,61 @@ class SafraAPI:
         response = requests.request("GET", url, headers=headers, data = payload)
 
         print(response.text.encode('utf8'))
+
+
+    @staticmethod
+    def GetStatement(apiKey, accountId):
+        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/open-banking/v1/accounts/"\
+               + accountId + "/transactions"
+
+        payload = {}
+        headers = {
+        'Authorization': 'Bearer '+ apiKey
+        }
+
+        response = requests.request("GET", url, headers=headers, data = payload)
+
+        print(response.text.encode('utf8'))
+
+  
     
     @staticmethod
     def Transfer(apiKey, accountId, dtoTransfer):
-        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/accounts/v1/accounts/"+srcAccount+"/transfers"
+        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/accounts/v1/accounts/"\
+               + accountId + "/transfers"
 
         payload = jsonify(dtoTransfer)
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + apiKey
+        }
+
+        response = requests.request("POST", url, headers=headers, data = payload)
+
+        print(response.text.encode('utf8'))
+
+
+    @staticmethod
+    def GetMorningCalls(startDate = "2020-07-09", endDate = "2020-07-14", playlist = "morningCalls", channel = "safra"):
+        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/media/v1/youtube?fromData=" \
+                + startDate +  "&toData=" + endDate + "&playlist=" + playlist + "&channel=" + channel
+
+        payload = {}
+        headers = {
+            'Authorization': 'Bearer ' + apiKey
+        }
+
+        response = requests.request("GET", url, headers=headers, data = payload)
+
+        print(response.text.encode('utf8'))
+
+
+    @staticmethod
+    def OpenAccount(name, email, phone):
+        url = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox/accounts/v1/optin"
+
+        payload = json.dumps({"Name": name, "Email": email, "Phone": phone})
+
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + apiKey
