@@ -90,7 +90,7 @@ class SafraAPI:
 
 
     @staticmethod
-    def GetMorningCalls(startDate = "2020-07-09", endDate = "2020-07-14", playlist = "morningCalls", channel = "safra"):
+    def GetMorningCalls(apiKey, startDate = "2020-07-09", endDate = "2020-07-14", playlist = "morningCalls", channel = "safra"):
         url = host + "/media/v1/youtube?fromData=" + startDate +  "&toData=" + endDate + "&playlist=" + playlist + "&channel=" + channel
 
         payload = {}
@@ -106,7 +106,7 @@ class SafraAPI:
 
 
     @staticmethod
-    def OpenAccount(name, email, phone):
+    def OpenAccount(apiKey, name, email, phone):
         url = host + "/accounts/v1/optin"
 
         payload = json.dumps({"Name": name, "Email": email, "Phone": phone})
