@@ -19,8 +19,10 @@ class SafraAPI:
         }
 
         response = requests.request("POST", url, headers=headers, data = payload)
+        token = json.loads(response.text)
+        
+        return token['access_token']
 
-        print(response.text.encode('utf8'))
 
     @staticmethod
     def GetAccountData(apiKey, accountId):
