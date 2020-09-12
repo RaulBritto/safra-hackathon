@@ -2,9 +2,9 @@ import requests
 import json
 from flask import jsonify
 
-class SafraAPI:
+host = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox"
 
-    host = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox"
+class SafraAPI:
 
     @staticmethod
     def GetOAUTHtoken(key):
@@ -35,8 +35,9 @@ class SafraAPI:
         }
 
         response = requests.request("GET", url, headers=headers, data = payload)
+        responseJson = json.loads(response.text)
 
-        print(response.text.encode('utf8'))
+        return responseJson
 
     @staticmethod
     def GetBalance(apiKey, accountId):
@@ -49,7 +50,9 @@ class SafraAPI:
 
         response = requests.request("GET", url, headers=headers, data = payload)
 
-        print(response.text.encode('utf8'))
+        responseJson = json.loads(response.text)
+
+        return responseJson
 
 
     @staticmethod
@@ -63,7 +66,9 @@ class SafraAPI:
 
         response = requests.request("GET", url, headers=headers, data = payload)
 
-        print(response.text.encode('utf8'))
+        responseJson = json.loads(response.text)
+
+        return responseJson
 
   
     
@@ -79,7 +84,9 @@ class SafraAPI:
 
         response = requests.request("POST", url, headers=headers, data = payload)
 
-        print(response.text.encode('utf8'))
+        responseJson = json.loads(response.text)
+
+        return responseJson
 
 
     @staticmethod
@@ -93,7 +100,9 @@ class SafraAPI:
 
         response = requests.request("GET", url, headers=headers, data = payload)
 
-        print(response.text.encode('utf8'))
+        responseJson = json.loads(response.text)
+
+        return responseJson
 
 
     @staticmethod
@@ -109,7 +118,9 @@ class SafraAPI:
 
         response = requests.request("POST", url, headers=headers, data = payload)
 
-        print(response.text.encode('utf8'))
+        responseJson = json.loads(response.text)
+
+        return responseJson
 
     @staticmethod
     def CheckHealth(apiKey):
@@ -122,4 +133,6 @@ class SafraAPI:
 
         response = requests.request("GET", url, headers=headers, data = payload)
 
-        print(response.text.encode('utf8'))
+        responseJson = json.loads(response.text)
+
+        return responseJson
