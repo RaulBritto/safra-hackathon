@@ -22,7 +22,8 @@ def add_headers(response):
 @app.route("/Store/<accountId>", methods=["GET"])
 def getLogin(accountId):
     token = AuthenticationHandler.GetCredential()
-    return "Usuario"
+    response = SafraAPI.GetAccountData(token, accountId)
+    return response["Data"]["Account"][0]["Nickname"]
 
 @app.route('/', methods=["GET", "POST", "DELETE"])
 def index():
