@@ -24,14 +24,18 @@ class Warehouse(BaseModel):
     qtd = IntegerField()
 
 class ShoppingCart(BaseModel):
-    cart_id = IntegerField()
-    store_id = ForeignKeyField(Store, backref='cart')
-    product_id = ForeignKeyField(Product, backref='cart')
-    qtd = IntegerField()
+    cart_id = IntegerField(unique=True)
     account_id = CharField()
+    total = FloatField()
 
+class Item(BaseModel):
+    cart_id = ForeignKeyField(Shopping, backref='item')
+    product_id = ForeignKeyField(Product, backref='item')
+    qtd = IntegerField()
+    total = FloatField()
+    
 class Schema:
     def __init__(self, dbFile):
         db.init(dbFile)
         db.connect()
-        db.create_tables([Store, Product, Warehouse, ShoppingCart])
+        db.create_tables([Store, Product, Warehouse, ShoppingCart, Item])
