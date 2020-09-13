@@ -16,8 +16,7 @@ class _ProductContainerState extends State<ProductContainer> {
   Widget build(BuildContext context) {
     var product = widget.product;
     final isAlreadyAdded = cartAddedProducts.contains(product);
-    return InkWell(
-        child: Container(
+    return Container(
       margin: EdgeInsets.all(5.0),
       child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -97,9 +96,9 @@ class _ProductContainerState extends State<ProductContainer> {
                 ),
               ),
               Positioned(
-                left: 0.0,
-                right: 0.0,
-                child: Container(
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(
                     padding:
                         EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                     decoration: BoxDecoration(
@@ -114,20 +113,30 @@ class _ProductContainerState extends State<ProductContainer> {
                     ),
                     child: Container(
                         alignment: Alignment.topRight,
-                        child: Icon(Icons.add_circle,
-                            size: 30.0,
-                            color:
-                                isAlreadyAdded ? Colors.green : Colors.white))),
-              ),
+                        child: IconButton(
+                          icon: Icon(Icons.add_circle,
+                              size: 30.0,
+                              color:
+                                  isAlreadyAdded ? Colors.green : Colors.white),
+                          tooltip: 'Add',
+                          onPressed: () {
+                            if (isAlreadyAdded) {
+                              cartAddedProducts.remove(product);
+                            } else {
+                              cartAddedProducts.add(product);
+                            }
+                          },
+                        )),
+                  )),
             ],
           )),
-    ),
-    onTap: () {
-          if(isAlreadyAdded) {
-            cartAddedProducts.remove(product);
-          } else {
-            cartAddedProducts.add(product);
-          }
-    } ,);
+    );
+    // onTap: () {
+    //       if(isAlreadyAdded) {
+    //         cartAddedProducts.remove(product);
+    //       } else {
+    //         cartAddedProducts.add(product);
+    //       }
+    // } ,);
   }
 }
