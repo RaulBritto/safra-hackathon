@@ -59,7 +59,7 @@ class _ProductInCartContainerState extends State<ProductInCartContainer> {
               children: [
                 Padding(
         padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-        child:Image.network(product.imageUrl,width: 50,)),
+        child:Image.asset(product.imageUrl,width: 50,)),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

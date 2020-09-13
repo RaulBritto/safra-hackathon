@@ -1,6 +1,6 @@
 class Product
 {
-  String _stockId;
+  String _productId;
   String _productName;
   String _storeName;
   String _imageUrl;
@@ -8,11 +8,11 @@ class Product
   double _price;
   String _discount;
 
-  Product(this._stockId, this._productName, this._storeName, this._imageUrl, this._price,
+  Product(this._productId, this._productName, this._storeName, this._imageUrl, this._price,
   this._discount, this._quantity);
 
   Product.map(dynamic obj) {
-    this._stockId = obj["stockId"];
+    this._productId = obj["productId"];
     this._productName = obj["productName"];
     this._storeName = obj["storeName"];
     this._imageUrl = obj["imageUrl"];
@@ -21,7 +21,7 @@ class Product
     this._quantity = obj["quantity"];
   }
 
-  String get stockId => _stockId;
+  String get productId => _productId;
   String get productName => _productName;
   String get storeName => _storeName;
   int get quantity => _quantity;
@@ -40,7 +40,7 @@ class Product
 
   Map<String, dynamic> toMap() {
     var map = new Map<String, dynamic>();
-    map["stockId"] = _stockId;
+    map["productId"] = _productId;
     map["productName"] = _productName;
     map["storeName"] = _storeName;
     map["imageUrl"] = _imageUrl;

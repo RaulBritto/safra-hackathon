@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:safra_market/models/user.dart';
 import 'package:safra_market/models/product.dart';
 import 'package:safra_market/containers/product_container.dart';
+// import 'package:safra_market/screens/home/home_screen_presenter.dart';
 
 import 'package:safra_market/data/mock_data.dart';
 
@@ -15,22 +16,40 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
   int _current = 0;
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool isProducListLoaded = false;
 
   void _submit() {
-    Navigator.of(context).pushNamed("/cart", arguments:widget.user);
+    Navigator.of(context).pushNamed("/cart", arguments: widget.user);
   }
+
+  // Future<void> getProducts(String accountId) async
+  // {
+  //     home_screen_presenter.getProductList(widget.user.accountId);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    widget.user = ModalRoute.of(context).settings.arguments;
+    widget.user = ModalRoute
+        .of(context)
+        .settings
+        .arguments;
+
+    // if (widget.user.accountId!=null && !isProducListLoaded) {
+    //   getProducts(widget.user.accountId);
+    //   isProducListLoaded = true;
+    // }
 
     var header = Padding(
         padding: EdgeInsets.symmetric(vertical: 0.0),
         child: Container(
             height: 200,
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
             child: Image.asset(
               "assets/saframarket_header.png",
               fit: BoxFit.cover,
@@ -53,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color(0xff151e45),
                       fontWeight: FontWeight.bold,
                       fontSize: 40))),
-          Text(', bem vindo!',
+          Text(', bem vindx!',
               style: TextStyle(
                   color: Color(0xff151e45),
                   fontWeight: FontWeight.bold,
@@ -67,9 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Image.network(
+                      child: Image.asset(
                         product.imageUrl,
                         fit: BoxFit.cover,
                       ));
@@ -122,9 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
               enlargeCenterPage: true,
             ),
             items: productList_1
-                .map((item) => ProductContainer(
-                      product: item,
-                    ))
+                .map((item) =>
+                ProductContainer(
+                  product: item,
+                ))
                 .toList(),
           ),
         ]));
@@ -152,13 +175,16 @@ class _HomeScreenState extends State<HomeScreen> {
         ]));
 
     var cartButon = new Padding(
-        padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 10.0) ,
+        padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 10.0),
         child: Material(
           elevation: 5.0,
           borderRadius: BorderRadius.circular(30.0),
           color: Color(0xff151e45),
           child: MaterialButton(
-            minWidth: MediaQuery.of(context).size.width,
+            minWidth: MediaQuery
+                .of(context)
+                .size
+                .width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             onPressed: _submit,
             child: Text(
@@ -169,21 +195,28 @@ class _HomeScreenState extends State<HomeScreen> {
               //     color: Colors.white, fontWeight: FontWeight.bold)
             ),
           ),
-    ));
+        ));
 
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text(_currentUser.accountId),
-        //   backgroundColor: Color(0xff151e45),
-        // ),
+      // appBar: AppBar(
+      //   title: Text(_currentUser.accountId),
+      //   backgroundColor: Color(0xff151e45),
+      // ),
+        key: scaffoldKey,
         body: Center(
             child: ListView(children: <Widget>[
-      header,
-      welcome,
-      featuredProducts,
-      fitness,
-      automobile,
-      cartButon
-    ])));
+              header,
+              welcome,
+              featuredProducts,
+              fitness,
+              automobile,
+              cartButon
+            ])));
   }
+
+  void _showSnackBar(String text) {
+    scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text(text)));
+  }
+
 }

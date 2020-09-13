@@ -22,7 +22,7 @@ class _ProductContainerState extends State<ProductContainer> {
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(
             children: <Widget>[
-              Image.network(product.imageUrl, fit: BoxFit.cover, width: 1000.0),
+              Image.asset(product.imageUrl, fit: BoxFit.cover, width: 1000.0),
               Positioned(
                 bottom: 0.0,
                 left: 0.0,

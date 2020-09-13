@@ -62,6 +62,15 @@ flutter:
      - onix.jpg
      - palio.jpg
      - uno.jpg
+     - barra.jpg
+     - carro1.png
+     - bancosupino.jpg
+     - esteira.jpg
+     - carro1.jpg
+     - carro2.jpg
+     - carro3.jpg
+     - carro4.jpg
+     - carro5.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

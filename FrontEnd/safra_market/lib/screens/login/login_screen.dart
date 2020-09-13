@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:safra_market/auth.dart';
 import 'package:safra_market/data/database_helper.dart';
 import 'package:safra_market/models/user.dart';
+import 'package:safra_market/models/product.dart';
 import 'package:safra_market/screens/login/login_screen_presenter.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class LoginScreenState extends State<LoginScreen>
   final formKey = new GlobalKey<FormState>();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   String _password, _accountId;
+  User _user;
 
   LoginScreenPresenter _presenter;
 
@@ -35,7 +37,7 @@ class LoginScreenState extends State<LoginScreen>
     final form = formKey.currentState;
 
     if (form.validate()) {
-      // setState(() => _isLoading = true);
+      setState(() => _isLoading = true);
       form.save();
       //Navigator.of(_ctx).pushNamed("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
       _presenter.doLogin(_accountId, _password);
@@ -53,7 +55,8 @@ class LoginScreenState extends State<LoginScreen>
       Navigator
           .of(_ctx)
           .pushReplacementNamed
-    ("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
+        ("/home", arguments: _user);
+    // ("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
   }
 
   @override
@@ -71,6 +74,7 @@ class LoginScreenState extends State<LoginScreen>
     final passwordField = new TextFormField(
       onSaved: (val) => _password = val,
       decoration: new InputDecoration(labelText: "Password"),
+      obscureText: true,
     );
     var loginButon = new Material(
       elevation: 5.0,
@@ -147,16 +151,40 @@ class LoginScreenState extends State<LoginScreen>
   @override
   void onLoginError(String errorTxt) {
     _showSnackBar(errorTxt);
-    // setState(() => _isLoading = false);
+    setState(() => _isLoading = false);
   }
 
   @override
   void onLoginSuccess(User user) async {
     _showSnackBar(user.toString());
-    // setState(() => _isLoading = false);
-    var db = new DatabaseHelper();
-    await db.saveUser(user);
+    setState(() {
+      _isLoading = false;
+      _user = user;
+    });
+    // var db = new DatabaseHelper();
+    // await db.saveUser(user);
+
     var authStateProvider = new AuthStateProvider();
     authStateProvider.notify(AuthState.LOGGED_IN);
+    
+    _presenter.getProductList(user.accountId);
+  }
+
+  @override
+  void onGetProductsError(String errorTxt) {
+    _showSnackBar(errorTxt);
+    // setState(() => _isLoading = false);
+  }
+
+  @override
+  void onGetProductsSuccess(Product product) async {
+    print("SUCCCCCCCESSSSSSSSSSSSSS");
+    _showSnackBar(product.toString());
+    // setState(() {
+    //   // _isLoading = false;
+    //   _user = product;
+    // });
+    // var db = new DatabaseHelper();
+    // await db.saveUser(user);
   }
 }

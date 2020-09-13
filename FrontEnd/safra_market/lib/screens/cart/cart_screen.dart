@@ -72,7 +72,7 @@ class _CartScreenState extends State<CartScreen> {
               child:Row(
                   mainAxisAlignment:MainAxisAlignment.end,
                   children:[
-                    Text("Total: $_total",
+                    Text('Total: R\$ ${_total.toStringAsFixed(2)}',
                       style: TextStyle(fontSize:20, fontWeight: FontWeight.bold),),
                     Text("",
                       style: TextStyle(fontSize:20),)
