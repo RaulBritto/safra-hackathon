@@ -35,7 +35,7 @@ def login():
 def getStore(storeId):
     store = controller.getStoreInfo(storeId)
     productList = controller.getProductsFromStore(storeId)
-    return jsonify(store)
+    return jsonify(store, productList)
 
 @app.route('/', methods=["GET", "POST", "DELETE"])
 def index():

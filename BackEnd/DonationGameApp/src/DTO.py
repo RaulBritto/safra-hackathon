@@ -16,15 +16,22 @@ class DTOUserInfo:
         }
 
 class DTOStore:
-    def __init__(self, store1=None, productList=None, error=False, error_msg=""):
+    def __init__(self, store1=None, error=False, error_msg=""):
         self.store = store1
-        self.productList = productList
     
     def serialize(self):
         return {
             'storeName': self.store.name,
             'storeCategory': self.store.store_type,
-            'productList': self.productList,
+        }
+
+class DTOProductList:
+    def __init__(self, productList=None, error=False, error_msg=""):
+        self.productList = productList
+    
+    def serialize(self):
+        return {
+            'productList': self.productList
         }
 
 class JSONDTOEncoder(JSONEncoder):
@@ -32,6 +39,8 @@ class JSONDTOEncoder(JSONEncoder):
         if isinstance(obj, DTOUserInfo):
             return obj.serialize()
         elif isinstance(obj, DTOStore):
+            return obj.serialize()
+        elif isinstance(obj, DTOProductList):
             return obj.serialize()
         return super(JSONDTOEncoder, self).default(obj)
 

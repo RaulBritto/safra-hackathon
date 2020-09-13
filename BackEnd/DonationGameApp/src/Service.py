@@ -13,11 +13,12 @@ class SafraMarketService:
     
     @staticmethod
     def getProductsFromStore(storeId):
-        return db_interactions.GetProducts(storeId)
+        object_dict = {p.id: {"id": p.id, "name": p.name, "price": p.price, "category": p.category} for p in db_interactions.GetProducts(storeId)}
+        return DTOProductList(productList = object_dict) 
         
     @staticmethod
     def getStoreInfo(storeId):
-        return DTOStore( store1 = db_interactions.GetStore(storeId)) 
+        return DTOStore(store1 = db_interactions.GetStore(storeId)) 
 
 
 
