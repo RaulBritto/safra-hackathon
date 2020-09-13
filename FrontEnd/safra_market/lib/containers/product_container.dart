@@ -115,7 +115,7 @@ class _ProductContainerState extends State<ProductContainer> {
                         alignment: Alignment.topRight,
                         child: IconButton(
                           icon: Icon(Icons.add_circle,
-                              size: 30.0,
+                              size: 40.0,
                               color:
                                   isAlreadyAdded ? Colors.green : Colors.white),
                           tooltip: 'Add',

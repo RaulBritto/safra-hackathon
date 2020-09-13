@@ -101,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen>{
             options: CarouselOptions(
                 autoPlay: true,
                 enlargeCenterPage: true,
+                autoPlayInterval: Duration(milliseconds: 700),
                 aspectRatio: 2.0,
                 onPageChanged: (index, reason) {
                   setState(() {
