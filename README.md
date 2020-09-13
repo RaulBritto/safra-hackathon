@@ -32,16 +32,16 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 
 ## Organização do Back:
 
-\BackEnd\SafraMarketApp # Root Folder
-	src/	
-		auth.keys
-		Authentication.py
-		DBHandle.py
-		DTO.py
-		Models.py
-		ModelsDB.py
-		pay.json
-		Payload.py
-		SafraAPI.py
-		SafraMarketWebApp.py
-		Service.py
+	\BackEnd\SafraMarketApp # Root Folder
+		src/	
+			auth.keys
+			Authentication.py
+			DBHandle.py
+			DTO.py
+			Models.py
+			ModelsDB.py
+			pay.json
+			Payload.py
+			SafraAPI.py
+			SafraMarketWebApp.py
+			Service.py
