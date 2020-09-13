@@ -56,6 +56,9 @@ class _FailurePurchaseScreenState extends State<FailurePurchaseScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 20.0),
+                      child:Icon(Icons.cancel,size: 50,color: Color(0xff151e45),)),
                   Text(
                     "SALDO INSUFICIENTE",
                     style: TextStyle(color: Color(0xff151e45), fontSize: 30, fontWeight: FontWeight.bold),

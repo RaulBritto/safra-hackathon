@@ -56,6 +56,9 @@ class _SucessPurchaseScreenState extends State<SucessPurchaseScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 20.0),
+                child:Icon(Icons.check_circle,size: 70,color: Color(0xff151e45),)),
             Text(
               "SUCESSO",
               style: TextStyle(color: Color(0xff151e45), fontSize: 50, fontWeight: FontWeight.bold),
