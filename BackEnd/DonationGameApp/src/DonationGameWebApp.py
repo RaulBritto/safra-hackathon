@@ -1,15 +1,16 @@
 from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
 from SafraAPI import SafraAPI
-from DB_Interact import DB_interact
+from DBHandle import DBHandle
 from Models import Schema
 
 import logging
 import sys, os
 import json
-Schema('../market_v2.db')
+
+
 logging.basicConfig(level=logging.DEBUG)
-db_interactions = DB_interact()
+db_interactions = DBHandle()
 app = Flask(__name__)
 
 @app.after_request
@@ -29,9 +30,11 @@ def getLogin(accountId):
 def index():
     return "Safra Market!"
 
-@app.route("/Store/<storeId>", methods=["GET"])
+@app.route("/Store/<storeId>/items", methods=["GET", "POST"])
 def getStore(storeId):
-    return "Store " + storeId
+    store = db_interactions.GetStore(storeId)
+    productList = db_interactions.GetProducts(storeId)
+    return "Bem-vindo a " + store.name
 
 @app.route("/Payment/<userId>", methods=["GET"])
 def payment(userId):
@@ -47,5 +50,4 @@ def About():
     return "About us"
     
 if __name__ == "__main__":
-    #Schema(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','presencecontrol.db'))
     app.run(debug=True)
