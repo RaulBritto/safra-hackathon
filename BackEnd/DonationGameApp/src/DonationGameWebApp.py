@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
 from SafraAPI import SafraAPI
 from DBHandle import DBHandle
-from Models import Schema
+from ModelsDB import Schema
 
 import logging
 import sys, os

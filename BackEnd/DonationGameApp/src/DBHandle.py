@@ -1,4 +1,4 @@
-from Models import *
+from ModelsDB import *
 
 Schema('../market.db')
 
