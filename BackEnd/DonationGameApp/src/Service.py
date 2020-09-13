@@ -3,6 +3,7 @@ from ModelsDB import Schema
 from Models import *
 from DBHandle import DBHandle
 from DTO import *
+from SafraAPI import SafraAPI
 
 db_interactions = DBHandle()
 
@@ -21,15 +22,19 @@ class SafraMarketService:
         return DTOStore(store1 = db_interactions.GetStore(storeId)) 
 
     @staticmethod
-    def pay(account, products_to_pay):
+    def pay(account, products_to_pay, APIKEY):
         productList = [i['id'] for i in products_to_pay['productList']]
         qtds = [i['quantity'] for i in products_to_pay['productList']]
-        #Calcular total da compra
         prices = db_interactions.GetProductsPrices(productList)
         total = 0
         for idx, pr in enumerate(prices):
             total += qtds[idx] * pr
-        return total
+        
+        response, status = SafraAPI.Transfer(APIKEY, account, total)   
+        if status == 201:
+            return True
+        
+        return False
 
 
 

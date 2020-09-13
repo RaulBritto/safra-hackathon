@@ -40,7 +40,9 @@ def index():
 def payment(userId):
     with open('pay.json') as json_file:
         data = json.load(json_file)
-    payment_return = controller.pay(userId, data)      
+        
+    KEY = AuthenticationHandler.GetCredential()
+    payment_return = controller.pay(userId, data, KEY)      
     return jsonify(payment_return)
 
 if __name__ == "__main__":
