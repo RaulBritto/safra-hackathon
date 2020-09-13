@@ -1,5 +1,6 @@
 # Safra Market
-Repositório para projeto da Hackathon technee do Banco Safra
+
+## Motivação
 
 Conforme sondagem do SEBRAE, alguns donos de micro e pequenas empresas apresentam resistência ou desinformação sobre vendas pela internet. 
 Entre os que não admitem o modelo online de negócio estão os menos escolarizados.
@@ -16,8 +17,6 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/wo7Q52r5ACI/0.jpg)](http://www.youtube.com/watch?v=wo7Q52r5ACI&feature=youtu.be "Safra Market")
-
-
 
 # SafraMarketWebApp (BackEnd)
 
@@ -45,3 +44,7 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 			SafraAPI.py
 			SafraMarketWebApp.py
 			Service.py
+
+## Front-end
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/Ra1IVjaY9aU/0.jpg)](http://www.youtube.com/watch?v=Ra1IVjaY9aU&feature=youtu.be "Safra Market - Demo")
