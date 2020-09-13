@@ -25,9 +25,9 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 ## Uso (para teste)
  No diretório raiz (BackEnd/SafraMarketWebApp/)
 
-1- Executar:
-	python src/SafraMarketWebApp.py
-2- Run the application on the FrontEnd folder (FrontEnd/presence-control-app/), see instructions in its README.md file
+	1- Executar:
+		python src/SafraMarketWebApp.py
+	2- Run the application on the FrontEnd folder (FrontEnd/presence-control-app/), see instructions in its README.md file
 
 ## Organização do Back:
 
