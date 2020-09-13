@@ -2,6 +2,7 @@ from Authentication import *
 from ModelsDB import Schema
 from Models import *
 from DBHandle import DBHandle
+from DTO import *
 
 db_interactions = DBHandle()
 
@@ -16,7 +17,7 @@ class SafraMarketService:
         
     @staticmethod
     def getStoreInfo(storeId):
-        return db_interactions.GetStore(storeId)
+        return DTOStore( store1 = db_interactions.GetStore(storeId)) 
 
 
 
