@@ -19,9 +19,9 @@ class SafraAPI:
         }
 
         response = requests.request("POST", url, headers=headers, data = payload)
-        token = json.loads(response.text)
+        response_json = json.loads(response.text)
         
-        return token['access_token']
+        return response_json['access_token']
 
 
     @staticmethod
@@ -35,9 +35,9 @@ class SafraAPI:
         }
 
         response = requests.request("GET", url, headers=headers, data = payload)
-        responseJson = json.loads(response.text)
+        response_json = json.loads(response.text)
 
-        return responseJson
+        return response_json
 
     @staticmethod
     def GetBalance(apiKey, accountId):

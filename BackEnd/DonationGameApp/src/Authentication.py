@@ -1,6 +1,7 @@
 import random
 import base64
 from SafraAPI import SafraAPI
+from DTO import *
 
 class AuthenticationHandler:
     
@@ -14,10 +15,14 @@ class AuthenticationHandler:
 
     @staticmethod
     def Login(accountId):
-        return
+        token = AuthenticationHandler.GetCredential()
+        user_data = SafraAPI.GetAccountData(token, accountId)
+        #print(user_data)
+        return DTOUserInfo(user_data)
 
     @staticmethod
     def GetCredential():
         tokenAuthorization = AuthenticationHandler.GetAuthenticationToken()
         apiKey = SafraAPI.GetOAUTHtoken(tokenAuthorization)
         return apiKey
+    
