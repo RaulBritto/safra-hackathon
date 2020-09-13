@@ -32,6 +32,8 @@ class NetworkUtil {
       if (statusCode < 200 || statusCode > 400 || json == null) {
         throw new Exception("Error while fetching data");
       }
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      print(res.toString());
       return _decoder.convert(res);
     }).timeout(Duration(seconds: 10), onTimeout: (){return null;});
   }

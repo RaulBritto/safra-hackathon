@@ -35,10 +35,10 @@ class LoginScreenState extends State<LoginScreen>
     final form = formKey.currentState;
 
     if (form.validate()) {
-      //setState(() => _isLoading = true);
+      // setState(() => _isLoading = true);
       form.save();
-      Navigator.of(_ctx).pushNamed("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
-      // _presenter.doLogin(_accountId, _password);
+      //Navigator.of(_ctx).pushNamed("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
+      _presenter.doLogin(_accountId, _password);
     }
   }
 
@@ -50,7 +50,10 @@ class LoginScreenState extends State<LoginScreen>
   @override
   onAuthStateChanged(AuthState state) {
     if (state == AuthState.LOGGED_IN)
-      Navigator.of(_ctx).pushReplacementNamed("/home", arguments: "Carousel Demo");
+      Navigator
+          .of(_ctx)
+          .pushReplacementNamed
+    ("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
   }
 
   @override
@@ -59,7 +62,9 @@ class LoginScreenState extends State<LoginScreen>
     final accountField = new TextFormField(
       onSaved: (val) => _accountId = val,
       validator: (val) {
-        return val.length < 10 ? "Account ID must have at least 11 chars" : null;
+        return val.length < 10
+            ? "Account ID must have at least 11 chars"
+            : null;
       },
       decoration: new InputDecoration(labelText: "Account ID"),
     );
@@ -72,7 +77,10 @@ class LoginScreenState extends State<LoginScreen>
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff151e45),
       child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
+        minWidth: MediaQuery
+            .of(context)
+            .size
+            .width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: _submit,
         child: Text(
@@ -131,21 +139,21 @@ class LoginScreenState extends State<LoginScreen>
             Container(
                 color: Colors.white,
                 child:
-                    Padding(padding: const EdgeInsets.all(36.0), child: loginForm))
-      ])),
+                Padding(padding: const EdgeInsets.all(36.0), child: loginForm))
+          ])),
     );
   }
 
   @override
   void onLoginError(String errorTxt) {
     _showSnackBar(errorTxt);
-    setState(() => _isLoading = false);
+    // setState(() => _isLoading = false);
   }
 
   @override
   void onLoginSuccess(User user) async {
     _showSnackBar(user.toString());
-    setState(() => _isLoading = false);
+    // setState(() => _isLoading = false);
     var db = new DatabaseHelper();
     await db.saveUser(user);
     var authStateProvider = new AuthStateProvider();
