@@ -12,8 +12,8 @@ class Product
   this._discount, this._quantity);
 
   Product.map(dynamic obj) {
-    this._productId = obj["productId"];
-    this._productName = obj["productName"];
+    this._productId = obj["id"];
+    this._productName = obj["name"];
     this._storeName = obj["storeName"];
     this._imageUrl = obj["imageUrl"];
     this._price = obj["price"];

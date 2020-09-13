@@ -17,6 +17,13 @@ class _CartScreenState extends State<CartScreen> {
   int _current = 0;
   double _total = 0;
 
+  void _submit() {
+    if(_total < 50000)
+      Navigator.of(context).pushNamed("/cart/success_purchase", arguments: _total);
+    else
+      Navigator.of(context).pushNamed("/cart/failure_purchase", arguments: _total);
+  }
+
   @override
   Widget build(BuildContext context) {
     refresh();
@@ -51,6 +58,7 @@ class _CartScreenState extends State<CartScreen> {
               // style: style.copyWith(
               //     color: Colors.white, fontWeight: FontWeight.bold)
             ),
+            onPressed: _submit,
           ),
         ));
 
