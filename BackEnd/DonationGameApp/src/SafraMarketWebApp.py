@@ -1,15 +1,22 @@
 from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
+<<<<<<< HEAD
 from SafraAPI import SafraAPI
+=======
+>>>>>>> 31b8fd02472bd9e44b85858692867521351fde02
 from Service import SafraMarketService
 from DTO import JSONDTOEncoder
 
 import logging
-import sys, os
 import json
 
+<<<<<<< HEAD
 #Schema('../market_v2.db')
+=======
+>>>>>>> 31b8fd02472bd9e44b85858692867521351fde02
 logging.basicConfig(level=logging.DEBUG)
+
+controller = SafraMarketService()
 
 app = Flask(__name__)
 app.json_encoder = JSONDTOEncoder
@@ -24,12 +31,7 @@ def add_headers(response):
 @app.route("/login", methods=["POST"])
 def login():
     login_data = request.form
-    #print("#################################################")
-    #print(login_data['accountId'])
     response = AuthenticationHandler.Login(login_data['accountId'])
-    #print("#################################################")
-    #print(response)
-    #print(jsonify(response))
     print(jsonify(response))
     return jsonify(response)
 
@@ -39,27 +41,22 @@ def list_products(accountId):
     print(SafraMarketService.GetProducts(accountId))
     return jsonify(SafraMarketService.GetProducts(accountId))
 
+@app.route("/Store/<storeId>/items", methods=["GET", "POST"])
+def getStore(storeId):
+    store = controller.getStoreInfo(storeId)
+    productList = controller.getProductsFromStore(storeId)
+    return jsonify(store, productList)
+
 @app.route('/', methods=["GET", "POST", "DELETE"])
 def index():
     return "Safra Market!"
 
-@app.route("/Store/<storeId>", methods=["GET"])
-def getStore(storeId):
-    return "Store " + storeId
-
-@app.route("/Payment/<userId>", methods=["GET"])
+@app.route("/Payment/<userId>", methods=["GET",  "POST"])
 def payment(userId):
-    return "Pagamento " + userId
+    with open('pay.json') as json_file:
+        data = json.load(json_file)
+    payment_return = controller.pay(userId, data)      
+    return jsonify(payment_return)
 
-@app.route('/Add/<accountId>/<storeId>/<productId>/<quantity>')
-def add_cart(accountId,storeId, productId, quantity):
-    db_interactions.add_to_cart(accountId,storeId, productId, quantity)
-    return db_interactions.return_cart_total()
-
-@app.route("/about")
-def About():
-    return "About us"
-    
 if __name__ == "__main__":
-    #Schema(os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','presencecontrol.db'))
     app.run(debug=True, host='0.0.0.0')

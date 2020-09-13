@@ -45,11 +45,33 @@ class DTOProductInfo:
             'discount': self.discount,
             'error': self.error,
             'error_msg': self.error_msg
+            
+class DTOStore:
+    def __init__(self, store1=None, error=False, error_msg=""):
+        self.store = store1
+    
+    def serialize(self):
+        return {
+            'storeName': self.store.name,
+            'storeCategory': self.store.store_type,
+        }
+
+class DTOProductList:
+    def __init__(self, productList=None, error=False, error_msg=""):
+        self.productList = productList
+    
+    def serialize(self):
+        return {
+            'productList': self.productList
         }
 
 class JSONDTOEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (DTOUserInfo,DTOProductInfo,DTOResponse)):
+            return obj.serialize()
+        elif isinstance(obj, DTOStore):
+            return obj.serialize()
+        elif isinstance(obj, DTOProductList):
             return obj.serialize()
         return super(JSONDTOEncoder, self).default(obj)
 
