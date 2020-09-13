@@ -7,23 +7,17 @@ class BaseModel(Model):
         database = db
 
 class StoreDB(BaseModel):
-    name = TextField()
-    store_type = TextField()
-    
-class ProductDB(BaseModel):
-    store_id = ForeignKeyField(StoreDB, backref='product')
-    name = TextField()
-    price = FloatField()
-    category = TextField()
-    discount = FloatField()
+    store_id = IntegerField(unique=True) 
+    name = CharField()
+    store_type = CharField()
 
-    @staticmethod
-    def GetProductList():
-        query = ProductDB.select()
-        for product in query:
-            store_name = StoreDB.get(StoreDB.id == product_id.store_id)
-            yield product.id, product.name, store_name, product.price, product.category, product.discount
-    
+class ProductDB(BaseModel):
+    product_id = IntegerField(unique=True)
+    store = ForeignKeyField(StoreDB, backref='product')
+    name = CharField()
+    price = FloatField()
+    category = CharField()
+
 class WarehouseDB(BaseModel):
     store_id = ForeignKeyField(StoreDB, backref='warehouse')
     product_id = ForeignKeyField(ProductDB, backref='warehouse')
