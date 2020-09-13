@@ -1,7 +1,7 @@
 import requests
 import json
 from flask import jsonify
-
+from Payload import Payload
 host = "https://af3tqle6wgdocsdirzlfrq7w5m.apigateway.sa-saopaulo-1.oci.customer-oci.com/fiap-sandbox"
 
 class SafraAPI:
@@ -75,8 +75,11 @@ class SafraAPI:
     @staticmethod
     def Transfer(apiKey, accountId, dtoTransfer):
         url = host + "/accounts/v1/accounts/" + accountId + "/transfers"
+        
+        #payload = jsonify(dtoTransfer)
+        payload_mock = Payload()
+        payload = payload_mock.GetPayloads(accountId)
 
-        payload = jsonify(dtoTransfer)
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + apiKey
@@ -86,7 +89,7 @@ class SafraAPI:
 
         responseJson = json.loads(response.text)
 
-        return responseJson
+        return responseJson, response.status_code
 
 
     @staticmethod
@@ -136,3 +139,4 @@ class SafraAPI:
         responseJson = json.loads(response.text)
 
         return responseJson
+    
