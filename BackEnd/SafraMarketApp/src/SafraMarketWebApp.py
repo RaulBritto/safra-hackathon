@@ -30,7 +30,6 @@ def login():
 
 @app.route("/product_list/<accountId>", methods=["GET"])
 def list_products(accountId):
-    print("#################################################")
     print(SafraMarketService.GetProducts(accountId))
     return jsonify(SafraMarketService.GetProducts(accountId))
 
