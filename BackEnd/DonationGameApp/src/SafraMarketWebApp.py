@@ -1,15 +1,16 @@
 from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
 from SafraAPI import SafraAPI
-from Models import Schema
+from Service import SafraMarketService
 from DTO import JSONDTOEncoder
 
 import logging
 import sys, os
 import json
 
-Schema('../market_v2.db')
 logging.basicConfig(level=logging.DEBUG)
+
+controller = SafraMarketService()
 
 app = Flask(__name__)
 app.json_encoder = JSONDTOEncoder
@@ -24,29 +25,22 @@ def add_headers(response):
 @app.route("/login", methods=["POST"])
 def login():
     login_data = request.form
-    #print("#################################################")
-    #print(login_data['accountId'])
     response = AuthenticationHandler.Login(login_data['accountId'])
     print("#################################################")
-    #print(response)
-    #print(jsonify(response))
     print(jsonify(response))
     return jsonify(response)
     
 
-@app.route("/Store/<accountId>", methods=["GET"])
-def getLogin(accountId):
-    token = AuthenticationHandler.GetCredential()
-    response = SafraAPI.GetAccountData(token, accountId)
-    return response["Data"]["Account"][0]["Nickname"]
+@app.route("/Store/<storeId>/items", methods=["GET", "POST"])
+def getStore(storeId):
+    store = controller.getStoreInfo(storeId)
+    productList = controller.getProductsFromStore(storeId)
+    return store.name
 
 @app.route('/', methods=["GET", "POST", "DELETE"])
 def index():
     return "Safra Market!"
 
-@app.route("/Store/<storeId>", methods=["GET"])
-def getStore(storeId):
-    return "Store " + storeId
 
 @app.route("/Payment/<userId>", methods=["GET"])
 def payment(userId):
