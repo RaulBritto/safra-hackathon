@@ -35,7 +35,7 @@ class LoginScreenState extends State<LoginScreen>
     final form = formKey.currentState;
 
     if (form.validate()) {
-      setState(() => _isLoading = true);
+      //setState(() => _isLoading = true);
       form.save();
       Navigator.of(_ctx).pushNamed("/home", arguments: new User('FakeUser', 'FakePassword', 'Fulano'));
       // _presenter.doLogin(_accountId, _password);

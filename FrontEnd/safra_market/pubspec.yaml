@@ -52,6 +52,16 @@ flutter:
   assets:
      - saframarket_logo.png
      - saframarket_header.png
+     - corda.jpg
+     - kit_peso.jpg
+     - peso5.jpg
+     - peso10.jpg
+     - whey.jpg
+     - argo.jpg
+     - fordka.jpg
+     - onix.jpg
+     - palio.jpg
+     - uno.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

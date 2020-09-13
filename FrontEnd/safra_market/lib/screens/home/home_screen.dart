@@ -2,49 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:safra_market/models/user.dart';
 import 'package:safra_market/models/product.dart';
+import 'package:safra_market/containers/product_container.dart';
 
-List<Product> productList_1 = [
-  Product('000001', 'Barra', 'Loja 5',
-      'https://homepages.cae.wisc.edu/~ece533/images/fruits.png', 100.0),
-  Product('000002', 'Peso 10kg', 'Loja 5',
-      'https://homepages.cae.wisc.edu/~ece533/images/cat.png', 40.0),
-  Product('000003', 'Peso 5kg', 'Loja 4',
-      'https://homepages.cae.wisc.edu/~ece533/images/tulips.png', 20.0),
-  Product('000004', 'Anilha', 'Loja 4',
-      'https://homepages.cae.wisc.edu/~ece533/images/peppers.png', 10.0),
-  Product('000005', 'Esteira', 'Loja 3',
-      'https://homepages.cae.wisc.edu/~ece533/images/fruits.png', 300.0),
-];
-List<Product> productList_2 = [
-  Product('000006', 'Uno', 'Loja 1',
-      'https://homepages.cae.wisc.edu/~ece533/images/cat.png', 50000.0),
-  Product('000007', 'Onix', 'Loja 2',
-      'https://homepages.cae.wisc.edu/~ece533/images/fruits.png', 40000.0),
-  Product('000008', 'Palio', 'Loja 1',
-      'https://homepages.cae.wisc.edu/~ece533/images/peppers.png', 20000.0),
-  Product('000009', 'Ford Ka', 'Loja 2',
-      'https://homepages.cae.wisc.edu/~ece533/images/cat.png', 10000.0),
-  Product('000010', 'Argo', 'Loja 2',
-      'https://homepages.cae.wisc.edu/~ece533/images/tulips.png', 30000.0),
-];
-
-List<Product> featuredProductList = [
-  productList_1[0],
-  productList_2[3],
-  productList_1[2],
-  productList_2[4],
-  productList_1[3],
-];
-
-// List<String> imageLinks = [
-//   'https://homepages.cae.wisc.edu/~ece533/images/fruits.png',
-//   'https://homepages.cae.wisc.edu/~ece533/images/cat.png',
-//   'https://homepages.cae.wisc.edu/~ece533/images/peppers.png',
-//   'https://homepages.cae.wisc.edu/~ece533/images/tulips.png'
-// ];
+import 'package:safra_market/data/mock_data.dart';
 
 class HomeScreen extends StatefulWidget {
-  final User user;
+  User user;
 
   HomeScreen({Key key, this.user}) : super(key: key);
 
@@ -55,9 +18,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _current = 0;
 
+  void _submit() {
+    Navigator.of(context).pushNamed("/cart", arguments:widget.user);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final User currentUser = ModalRoute.of(context).settings.arguments;
+    widget.user = ModalRoute.of(context).settings.arguments;
 
     var header = Padding(
         padding: EdgeInsets.symmetric(vertical: 0.0),
@@ -81,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Text(currentUser.nickname,
+              child: Text(widget.user.nickname,
                   style: TextStyle(
                       color: Color(0xff151e45),
                       fontWeight: FontWeight.bold,
@@ -184,9 +151,30 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ]));
 
+    var loginButon = new Padding(
+        padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 10.0) ,
+        child: Material(
+          elevation: 5.0,
+          borderRadius: BorderRadius.circular(30.0),
+          color: Color(0xff151e45),
+          child: MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            onPressed: _submit,
+            child: Text(
+              "Go to Cart",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+              // style: style.copyWith(
+              //     color: Colors.white, fontWeight: FontWeight.bold)
+            ),
+          ),
+    ));
+
     return Scaffold(
         // appBar: AppBar(
-        //   title: Text(currentUser.accountId),
+        //   title: Text(_currentUser.accountId),
+        //   backgroundColor: Color(0xff151e45),
         // ),
         body: Center(
             child: ListView(children: <Widget>[
@@ -194,105 +182,8 @@ class _HomeScreenState extends State<HomeScreen> {
       welcome,
       featuredProducts,
       fitness,
-      automobile
+      automobile,
+      loginButon
     ])));
-  }
-}
-
-class ProductContainer extends StatefulWidget {
-  final Product product;
-
-  ProductContainer({Key key, this.product}) : super(key: key);
-
-  @override
-  _ProductContainerState createState() => _ProductContainerState();
-}
-
-class _ProductContainerState extends State<ProductContainer> {
-  @override
-  Widget build(BuildContext context) {
-    var product = widget.product;
-    return Container(
-      margin: EdgeInsets.all(5.0),
-      child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(5.0)),
-          child: Stack(
-            children: <Widget>[
-              Image.network(product.imageUrl, fit: BoxFit.cover, width: 1000.0),
-              Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Color.fromARGB(200, 0, 0, 0),
-                        Color.fromARGB(0, 0, 0, 0)
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        alignment: Alignment.bottomLeft,
-                        //padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              product.productName,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'R\$ ${product.price}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.bottomRight,
-                        //padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              product.productName,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'R\$ ${product.price}',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          )),
-    );
   }
 }
