@@ -1,19 +1,12 @@
 from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
-<<<<<<< HEAD
 from SafraAPI import SafraAPI
-=======
->>>>>>> 31b8fd02472bd9e44b85858692867521351fde02
 from Service import SafraMarketService
 from DTO import JSONDTOEncoder
 
 import logging
 import json
 
-<<<<<<< HEAD
-#Schema('../market_v2.db')
-=======
->>>>>>> 31b8fd02472bd9e44b85858692867521351fde02
 logging.basicConfig(level=logging.DEBUG)
 
 controller = SafraMarketService()
