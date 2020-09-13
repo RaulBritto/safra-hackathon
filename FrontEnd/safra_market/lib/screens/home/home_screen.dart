@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ]));
 
-    var loginButon = new Padding(
+    var cartButon = new Padding(
         padding: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 10.0) ,
         child: Material(
           elevation: 5.0,
@@ -183,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
       featuredProducts,
       fitness,
       automobile,
-      loginButon
+      cartButon
     ])));
   }
 }

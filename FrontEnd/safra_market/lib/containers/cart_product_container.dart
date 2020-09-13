@@ -3,130 +3,104 @@ import 'package:safra_market/models/product.dart';
 
 class ProductInCartContainer extends StatefulWidget {
   final Product product;
+  final int index;
+  final Function() notifyParent;
 
-  ProductInCartContainer({Key key, this.product}) : super(key: key);
+  ProductInCartContainer({Key key, this.product, this.index, this.notifyParent})
+      : super(key: key);
 
   @override
   _ProductInCartContainerState createState() => _ProductInCartContainerState();
 }
 
 class _ProductInCartContainerState extends State<ProductInCartContainer> {
+  void _decrementQuantity() {
+    setState(() {
+      widget.product.decrementQuantity();
+    });
+    widget.notifyParent();
+  }
+
+  void _incrementQuantity() {
+    setState(() {
+      widget.product.incrementQuantity();
+    });
+    widget.notifyParent();
+  }
+
   @override
   Widget build(BuildContext context) {
     var product = widget.product;
-    final isAlreadyAdded = cartAddedProducts.contains(product);
-    return InkWell(
-      child: Container(
+    // _quantity = product.quantity;
+    return Container(
+      height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10)
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         margin: EdgeInsets.all(5.0),
-        child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            child: Stack(
-              children: <Widget>[
-                Image.network(product.imageUrl, fit: BoxFit.cover, width: 1000.0),
-                Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Padding(
+        padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+        child:Image.network(product.imageUrl,width: 50,)),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 80,
+                      alignment: Alignment.centerLeft,
+                      child: Text(product.productName,style: TextStyle(fontWeight: FontWeight.bold),),
                     ),
-                    padding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomLeft,
-                          //padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                product.productName,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                product.storeName,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.bottomRight,
-                          //padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 5.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                'R\$ ${product.price.toStringAsFixed(2)}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                '-' + product.discount,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    Container(
+                        width: 80,
+                      alignment: Alignment.centerLeft,
+                      child: Text(product.storeName, style: TextStyle(fontSize: 12),)
                     ),
-                  ),
+                  ],
+                )
+              ],
+            ),
+            Container(
+                alignment: Alignment.center,
+                child: Text('R\$ ${product.price.toStringAsFixed(2)}')
+            ),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.remove),
+                  tooltip: 'Remove',
+                  onPressed: _decrementQuantity,
                 ),
-                Positioned(
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                      padding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromARGB(200, 0, 0, 0),
-                            Color.fromARGB(0, 0, 0, 0)
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                      ),
-                      child: Container(
-                          alignment: Alignment.topRight,
-                          child: Icon(Icons.add_circle,
-                              size: 30.0,
-                              color:
-                              isAlreadyAdded ? Colors.green : Colors.white))),
+                Text("${widget.product.quantity}",
+                    style: TextStyle(),
+                    textAlign: TextAlign.center,
+                ),
+                IconButton(
+                  icon: Icon(Icons.add),
+                  tooltip: 'Add',
+                  onPressed: _incrementQuantity,
                 ),
               ],
-            )),
-      ),
-      onTap: () {
-        if(isAlreadyAdded) {
-          cartAddedProducts.remove(product);
-        } else {
-          cartAddedProducts.add(product);
-        }
-      } ,);
+            )
+          ],
+        )
+    );
   }
 }
