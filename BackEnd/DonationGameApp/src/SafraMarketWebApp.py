@@ -1,14 +1,14 @@
 from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
 from SafraAPI import SafraAPI
-from Models import Schema
+#from Models import Schema
 from DTO import JSONDTOEncoder
 
 import logging
 import sys, os
 import json
 
-Schema('../market_v2.db')
+#Schema('../market_v2.db')
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
