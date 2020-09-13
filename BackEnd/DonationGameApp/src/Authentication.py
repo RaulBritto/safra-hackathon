@@ -15,10 +15,15 @@ class AuthenticationHandler:
 
     @staticmethod
     def Login(accountId):
-        token = AuthenticationHandler.GetCredential()
-        user_data = SafraAPI.GetAccountData(token, accountId)
-        #print(user_data)
-        return DTOUserInfo(user_data)
+        try:
+            token = AuthenticationHandler.GetCredential()
+            user_data = SafraAPI.GetAccountData(token, accountId)
+        except:
+            error_msg = "Error while trying to login."
+            print(error_msg)
+            user_data = SafraAPI.GetAccountData(true,error_msg)            
+        finally:
+            return DTOUserInfo(user_data)
 
     @staticmethod
     def GetCredential():

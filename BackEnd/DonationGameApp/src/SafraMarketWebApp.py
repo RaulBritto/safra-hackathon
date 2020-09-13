@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from Authentication import AuthenticationHandler
 from SafraAPI import SafraAPI
-#from Models import Schema
+from Service import SafraMarketService
 from DTO import JSONDTOEncoder
 
 import logging
@@ -27,18 +27,17 @@ def login():
     #print("#################################################")
     #print(login_data['accountId'])
     response = AuthenticationHandler.Login(login_data['accountId'])
-    print("#################################################")
+    #print("#################################################")
     #print(response)
     #print(jsonify(response))
     print(jsonify(response))
     return jsonify(response)
-    
 
-@app.route("/Store/<accountId>", methods=["GET"])
-def getLogin(accountId):
-    token = AuthenticationHandler.GetCredential()
-    response = SafraAPI.GetAccountData(token, accountId)
-    return response["Data"]["Account"][0]["Nickname"]
+@app.route("/product_list/<accountId>", methods=["GET"])
+def list_products(accountId):
+    print("#################################################")
+    print(SafraMarketService.GetProducts(accountId))
+    return jsonify(SafraMarketService.GetProducts(accountId))
 
 @app.route('/', methods=["GET", "POST", "DELETE"])
 def index():

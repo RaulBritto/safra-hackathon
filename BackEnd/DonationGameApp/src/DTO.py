@@ -1,5 +1,16 @@
 from flask.json import JSONEncoder
 
+class DTOResponse:
+    def __init__(self, error=False, error_msg=""):
+        self.error = error
+        self.error_msg = error_msg
+
+    def serialize(self):
+        return {
+            'error': self.error,
+            'error_msg': self.error_msg
+        }
+
 class DTOUserInfo:
     def __init__(self, user_data, error=False, error_msg=""):
         self.accountId = user_data['Data']['Account'][0]['AccountId']
@@ -15,9 +26,30 @@ class DTOUserInfo:
             'error_msg': self.error_msg
         }
 
+class DTOProductInfo:
+    def __init__(self, productId, productName, storeName, category, discount, error=False, error_msg=""):
+        self.productId = productId
+        self.productName = productName
+        self.storeName = storeName
+        self.price = price
+        self.discount = discount
+        self.error = error
+        self.error_msg = error_msg
+
+    def serialize(self):
+        return {
+            'productId': self.productId,
+            'productName': self.productName,
+            'storeName': self.storeName,
+            'price': self.price,
+            'discount': self.discount,
+            'error': self.error,
+            'error_msg': self.error_msg
+        }
+
 class JSONDTOEncoder(JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, DTOUserInfo):
+        if isinstance(obj, (DTOUserInfo,DTOProductInfo,DTOResponse)):
             return obj.serialize()
         return super(JSONDTOEncoder, self).default(obj)
 
