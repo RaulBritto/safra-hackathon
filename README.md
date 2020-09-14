@@ -56,6 +56,51 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/BOFnJw5cg4Y/0.jpg)](http://www.youtube.com/watch?v=BOFnJw5cg4Y&feature=youtu.be "Safra Market - Demo")
 
-## Uso (para teste)
-	Para executar o código é necessário do Flutter (https://flutter.dev/) e do Android Studio. 
+#  SafraMarketWebApp (FrontEnd)
+O Front-end do aplicativo oferece uma experiência amigável ao usuário do Safra Market em plataforma mobile. 
+	
+## Ferramenta:
+Desenvolvido em Flutter, uma framework open-source criada pela Google para desenvolvimento de UI. Possui uma comunidade extensa, o que contribui para a utilização da plataforma.
+	
+## Telas / Fluxo:
+1- Tela de Login
+	- Efetua login
+2- Home Page
+	- Seleciona produtos
+3- Cart Page
+	- Altera quantidades
+	- Confirma compra
+4- Confirmation Page
+	- Mostra resultado da compra
 
+## Organização:
+- lib
+	- containers
+		cart_product_container.dart
+		product_container.dart
+		store_container.dart
+	- data
+		database_helper.dart
+		global_data.dart
+		mock_data.dart
+		rest_ds.dart
+	- models
+		product.dart
+		store.dart
+		user.dart
+	- screens
+		- cart
+			cart_screen.dart
+			failure_purchase.dart
+			success_purchase.dart
+		- home
+			home_screen.dart
+			home_screen_presenter.dart
+		- login
+			login_screen.dart
+			login_screen.dart
+	- utils
+		network_util.dart
+	auth.dart
+	main.dart
+	routes.dart
