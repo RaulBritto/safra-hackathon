@@ -22,8 +22,15 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 
 - BackEnd:
 	O back-end cria a interface com a API open-bank Safra e com o banco de dados SafraMarket.
+
+## Pacotes necessários
+
+	- peewee==3.13.3
+	- Flask==0.12.2
+	- requests==2.14.2
+	
 ## Uso (para teste)
- No diretório raiz (BackEnd/SafraMarketWebApp/)
+ No diretório raiz (BackEnd/SafraMarketApp/)
 
 	1- Executar:
 		python src/SafraMarketWebApp.py
@@ -45,6 +52,10 @@ Você como lojista, acessa a plataforma e oferece seus produtos e serviços de f
 			SafraMarketWebApp.py
 			Service.py
 
-## Front-end
+# Front-end
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/Ra1IVjaY9aU/0.jpg)](http://www.youtube.com/watch?v=Ra1IVjaY9aU&feature=youtu.be "Safra Market - Demo")
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/BOFnJw5cg4Y/0.jpg)](http://www.youtube.com/watch?v=BOFnJw5cg4Y&feature=youtu.be "Safra Market - Demo")
+
+## Uso (para teste)
+	Para executar o código é necessário do Flutter (https://flutter.dev/) e do Android Studio. 
+
