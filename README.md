@@ -74,33 +74,33 @@ Desenvolvido em Flutter, uma framework open-source criada pela Google para desen
 	- Mostra resultado da compra
 
 ## Organização:
-- lib
-	- containers
-		cart_product_container.dart
-		product_container.dart
-		store_container.dart
-	- data
-		database_helper.dart
-		global_data.dart
-		mock_data.dart
-		rest_ds.dart
-	- models
-		product.dart
-		store.dart
-		user.dart
-	- screens
-		- cart
-			cart_screen.dart
-			failure_purchase.dart
-			success_purchase.dart
-		- home
-			home_screen.dart
-			home_screen_presenter.dart
-		- login
-			login_screen.dart
-			login_screen.dart
-	- utils
-		network_util.dart
-	auth.dart
-	main.dart
-	routes.dart
+	- lib
+		- containers
+			cart_product_container.dart
+			product_container.dart
+			store_container.dart
+		- data
+			database_helper.dart
+			global_data.dart
+			mock_data.dart
+			rest_ds.dart
+		- models
+			product.dart
+			store.dart
+			user.dart
+		- screens
+			- cart
+				cart_screen.dart
+				failure_purchase.dart
+				success_purchase.dart
+			- home
+				home_screen.dart
+				home_screen_presenter.dart
+			- login
+				login_screen.dart
+				login_screen.dart
+		- utils
+			network_util.dart
+		auth.dart
+		main.dart
+		routes.dart
