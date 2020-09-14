@@ -63,21 +63,21 @@ O Front-end do aplicativo oferece uma experiência amigável ao usuário do Safr
 Desenvolvido em Flutter, uma framework open-source criada pela Google para desenvolvimento de UI. Possui uma comunidade extensa, o que contribui para a utilização da plataforma.
 
 ## Uso (para teste):
-1- Instalar flutter e Android Studio.
-2- Abrir o projeto pelo Android Studio.
-3- Conectar o celular ao computador.
-4- Executar o projeto.
+	1- Instalar flutter e Android Studio.
+	2- Abrir o projeto pelo Android Studio.
+	3- Conectar o celular ao computador.
+	4- Executar o projeto.
 	
 ## Telas / Fluxo:
-1- Tela de Login
-	- Efetua login
-2- Home Page
-	- Seleciona produtos
-3- Cart Page
-	- Altera quantidades
-	- Confirma compra
-4- Confirmation Page
-	- Mostra resultado da compra
+	1- Tela de Login
+		- Efetua login
+	2- Home Page
+		- Seleciona produtos
+	3- Cart Page
+		- Altera quantidades
+		- Confirma compra
+	4- Confirmation Page
+		- Mostra resultado da compra
 
 ## Organização:
 	- lib
